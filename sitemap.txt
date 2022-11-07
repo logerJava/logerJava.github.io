@@ -1,7 +1,5 @@
 http://logerjava.github.io/2022/11/07/whyMQ/
-http://logerjava.github.io/2022/11/04/hello-word/
 http://logerjava.github.io/tags/index.html
 http://logerjava.github.io/categories/index.html
 http://logerjava.github.io/
-http://logerjava.github.io/tags/MySQL/
 http://logerjava.github.io/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/
