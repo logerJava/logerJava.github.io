@@ -1,4 +1,4 @@
-http://logerjava.github.io/2022/11/07/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/
+http://logerjava.github.io/2022/11/07/whyMQ/
 http://logerjava.github.io/2022/11/04/hello-word/
 http://logerjava.github.io/tags/index.html
 http://logerjava.github.io/categories/index.html
