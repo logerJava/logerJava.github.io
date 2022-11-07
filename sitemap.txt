@@ -1,0 +1,5 @@
+http://logerjava.github.io/2022/11/04/hello-word/
+http://logerjava.github.io/tags/index.html
+http://logerjava.github.io/categories/index.html
+http://logerjava.github.io/
+http://logerjava.github.io/tags/MySQL/
