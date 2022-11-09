@@ -42,6 +42,8 @@
   
   
   
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 
@@ -336,9 +338,9 @@
         <ul>
           <li><a href="/tags">All</a></li>
           
-          <li><a href="/tags/Tools/">Tools</a></li>
-          
           <li><a href="/tags/Java/">Java</a></li>
+          
+          <li><a href="/tags/Tools/">Tools</a></li>
           
           <li><a href="/tags/Linux/">Linux</a></li>
           
@@ -353,38 +355,6 @@
     </header>
     <!-- /header -->
     <div class="article-body">
-      
-      <h3 class="panel-title mb-1x">
-        <a href="/tags/Tools/" title="#Tools"># Tools</a>
-        <small class="text-muted">(Total 1 articles)</small>
-      </h3>
-      <div class="row">
-        
-        <div class="col-md-6">
-          
-<article class="panel panel-default hover-shadow hover-grow" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="panel-body">
-     <div class="article-meta">
-       <time datetime="2022-11-09T05:56:50.000Z" itemprop="datePublished">2022-11-09</time>
-     </div>
-     <h3 class="article-title" itemprop="name">
-       <a class="article-link" href="/2022/11/09/KeyTool-%E5%B7%A5%E5%85%B7%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5%E5%AF%B9/">KeyTool 工具生成密钥对</a>
-     </h3>
-   </div>
-   
-   <div class="panel-footer">
-     
-      <a href="/tags/Tools/" class="label label-default mb">Tools</a>
-     
-     
-   </div>
-   
-</article>
-
-
-        </div>
-        
-      </div>
       
       <h3 class="panel-title mb-1x">
         <a href="/tags/Java/" title="#Java"># Java</a>
@@ -487,6 +457,38 @@
       <a href="/tags/Java/" class="label label-default mb">Java</a>
      
       <a href="/tags/MySQL/" class="label label-default mb">MySQL</a>
+     
+     
+   </div>
+   
+</article>
+
+
+        </div>
+        
+      </div>
+      
+      <h3 class="panel-title mb-1x">
+        <a href="/tags/Tools/" title="#Tools"># Tools</a>
+        <small class="text-muted">(Total 1 articles)</small>
+      </h3>
+      <div class="row">
+        
+        <div class="col-md-6">
+          
+<article class="panel panel-default hover-shadow hover-grow" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="panel-body">
+     <div class="article-meta">
+       <time datetime="2022-11-09T05:56:50.000Z" itemprop="datePublished">2022-11-09</time>
+     </div>
+     <h3 class="article-title" itemprop="name">
+       <a class="article-link" href="/2022/11/09/KeyTool-%E5%B7%A5%E5%85%B7%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5%E5%AF%B9/">KeyTool 工具生成密钥对</a>
+     </h3>
+   </div>
+   
+   <div class="panel-footer">
+     
+      <a href="/tags/Tools/" class="label label-default mb">Tools</a>
      
      
    </div>
@@ -868,29 +870,24 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
    
     
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
   <script type="text/javascript">
-  var GUEST = ['nick', 'mail', 'link'];
-  var meta = 'nick,mail,link';
-  meta = meta.split(',').filter(function(item) {
-    return GUEST.indexOf(item) > -1;
-  });
-  new Valine({
-    el: '#vcomments',
-    verify: false,
-    notify: false,
-    appId: '',
-    appKey: '',
-    placeholder: 'Just go go',
-    avatar: 'mm',
-    meta: meta,
-    pageSize: '10' || 10,
-    visitor: false
-  });
+  var gitalk = new Gitalk({
+    clientID: '38fc3614e5987e25f030',
+    clientSecret: '5644ed62e2f2a5b5cf0bc9213c36c9f2a050f773',
+    repo: 'https://github.com/logerJava/CommentBase',
+    owner: 'logerJava',
+    admin: ['logerJava'],
+    id: md5(location.pathname),
+    distractionFreeMode: true,
+    language: 'zh-CN',
+    enableHotKey: 'true'
+  })
+  gitalk.render('comments')
   </script>
-
-     
+      
 
 
 

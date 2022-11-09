@@ -13,8 +13,8 @@ http://logerjava.github.io/2022/11/09/Linux-%E5%AE%89%E8%A3%85-MySQL/
 http://logerjava.github.io/tags/index.html
 http://logerjava.github.io/categories/index.html
 http://logerjava.github.io/
-http://logerjava.github.io/tags/Tools/
 http://logerjava.github.io/tags/Java/
+http://logerjava.github.io/tags/Tools/
 http://logerjava.github.io/tags/Linux/
 http://logerjava.github.io/tags/MySQL/
 http://logerjava.github.io/tags/Nacos/
