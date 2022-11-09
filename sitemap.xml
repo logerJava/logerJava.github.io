@@ -2,6 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://logerjava.github.io/about/index.html</loc>
+    
+    <lastmod>2022-11-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://logerjava.github.io/2022/11/09/KeyTool-%E5%B7%A5%E5%85%B7%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5%E5%AF%B9/</loc>
+    
+    <lastmod>2022-11-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://logerjava.github.io/2022/11/08/Java-%E6%B3%9B%E5%9E%8B%E8%AF%A6%E8%A7%A3/</loc>
+    
+    <lastmod>2022-11-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://logerjava.github.io/2022/11/07/whyMQ/</loc>
     
     <lastmod>2022-11-09</lastmod>
@@ -48,24 +75,6 @@
   
   <url>
     <loc>http://logerjava.github.io/2022/11/09/MySQL-Explain/</loc>
-    
-    <lastmod>2022-11-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://logerjava.github.io/2022/11/08/Java-%E6%B3%9B%E5%9E%8B%E8%AF%A6%E8%A7%A3/</loc>
-    
-    <lastmod>2022-11-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://logerjava.github.io/2022/11/09/KeyTool-%E5%B7%A5%E5%85%B7%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5%E5%AF%B9/</loc>
     
     <lastmod>2022-11-09</lastmod>
     
@@ -128,14 +137,7 @@
 
   
   <url>
-    <loc>http://logerjava.github.io/tags/Java-%E5%9F%BA%E7%A1%80/</loc>
-    <lastmod>2022-11-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://logerjava.github.io/tags/tools/</loc>
+    <loc>http://logerjava.github.io/tags/Java/</loc>
     <lastmod>2022-11-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -149,14 +151,14 @@
   </url>
   
   <url>
-    <loc>http://logerjava.github.io/tags/Java/</loc>
+    <loc>http://logerjava.github.io/tags/MySQL/</loc>
     <lastmod>2022-11-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://logerjava.github.io/tags/MySQL/</loc>
+    <loc>http://logerjava.github.io/tags/Tools/</loc>
     <lastmod>2022-11-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
