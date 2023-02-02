@@ -17,23 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>KeyTool 工具生成密钥对 | logerJava</title>
-  <meta name="description" content="生成 JKS1keytool -genkeypair -alias *** -keyalg RSA -keypass *** -keystore xxx.jks -storepass *** -keystore xxx.jks  查看 JKS 生成的证书详细信息1keytool -list -v -keystore xxx.jks  导出 cer 证书1keytool -alias *** -ex">
+  <title>GroovyClassLoader 从字符串中加载解析代码 | logerJava</title>
+  <meta name="description" content="应用场景个性化较强, 复杂多变的业务场景, 可将代码持久化到数据库, 在执行时直接执行数据库脚本达到动态更新效果 使用示例pom12345&lt;dependency&gt;   &lt;groupId&gt;org.codehaus.groovy&lt;&#x2F;groupId&gt;   &lt;artifactId&gt;groovy&lt;&#x2F;artifactId&gt;   &lt;version">
 <meta property="og:type" content="article">
-<meta property="og:title" content="KeyTool 工具生成密钥对">
-<meta property="og:url" content="http://logerjava.github.io/2022/11/09/KeyTool-%E5%B7%A5%E5%85%B7%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5%E5%AF%B9/index.html">
+<meta property="og:title" content="GroovyClassLoader 从字符串中加载解析代码">
+<meta property="og:url" content="http://logerjava.github.io/2022/11/11/GroovyClassLoader-%E4%BB%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%8A%A0%E8%BD%BD%E8%A7%A3%E6%9E%90%E4%BB%A3%E7%A0%81/index.html">
 <meta property="og:site_name" content="logerJava">
-<meta property="og:description" content="生成 JKS1keytool -genkeypair -alias *** -keyalg RSA -keypass *** -keystore xxx.jks -storepass *** -keystore xxx.jks  查看 JKS 生成的证书详细信息1keytool -list -v -keystore xxx.jks  导出 cer 证书1keytool -alias *** -ex">
+<meta property="og:description" content="应用场景个性化较强, 复杂多变的业务场景, 可将代码持久化到数据库, 在执行时直接执行数据库脚本达到动态更新效果 使用示例pom12345&lt;dependency&gt;   &lt;groupId&gt;org.codehaus.groovy&lt;&#x2F;groupId&gt;   &lt;artifactId&gt;groovy&lt;&#x2F;artifactId&gt;   &lt;version">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/logerJava/los/main/picture/KeyTool%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5.png">
-<meta property="article:published_time" content="2022-11-09T05:56:50.000Z">
-<meta property="article:modified_time" content="2022-11-09T06:06:56.971Z">
+<meta property="article:published_time" content="2022-11-11T02:28:39.000Z">
+<meta property="article:modified_time" content="2022-11-11T02:30:33.338Z">
 <meta property="article:author" content="loger">
-<meta property="article:tag" content="Tools">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/logerJava/los/main/picture/KeyTool%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://logerjava.github.io/2022/11/09/KeyTool-%E5%B7%A5%E5%85%B7%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5%E5%AF%B9/index.html">
+  <link rel="canonical" href="http://logerjava.github.io/2022/11/11/GroovyClassLoader-%E4%BB%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%8A%A0%E8%BD%BD%E8%A7%A3%E6%9E%90%E4%BB%A3%E7%A0%81/index.html">
   
     <link rel="alternate" href="/atom.xml" title="logerJava" type="application/atom+xml">
   
@@ -305,14 +303,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-KeyTool-工具生成密钥对" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-GroovyClassLoader-从字符串中加载解析代码" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      KeyTool 工具生成密钥对
+      GroovyClassLoader 从字符串中加载解析代码
     </h1>
   
 
@@ -320,24 +318,24 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2022/11/09/KeyTool-%E5%B7%A5%E5%85%B7%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5%E5%AF%B9/" class="article-date">
-	  <time datetime="2022-11-09T05:56:50.000Z" itemprop="datePublished">2022-11-09</time>
+	<a href="/2022/11/11/GroovyClassLoader-%E4%BB%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%8A%A0%E8%BD%BD%E8%A7%A3%E6%9E%90%E4%BB%A3%E7%A0%81/" class="article-date">
+	  <time datetime="2022-11-11T02:28:39.000Z" itemprop="datePublished">2022-11-11</time>
 	</a>
 </span>
         
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/Tools/" rel="tag">Tools</a>
+	<a class="article-tag-link-link" href="/tags/Java/" rel="tag">Java</a>
   </span>
 
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/11/09/KeyTool-%E5%B7%A5%E5%85%B7%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5%E5%AF%B9/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/11/11/GroovyClassLoader-%E4%BB%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%8A%A0%E8%BD%BD%E8%A7%A3%E6%9E%90%E4%BB%A3%E7%A0%81/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 81(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 258(字)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 1(分)</span>
@@ -347,16 +345,15 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h3 id="生成-JKS"><a href="#生成-JKS" class="headerlink" title="生成 JKS"></a>生成 JKS</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -genkeypair -alias *** -keyalg RSA -keypass *** -keystore xxx.jks -storepass *** -keystore xxx.jks</span><br></pre></td></tr></table></figure>
+        <h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>个性化较强, 复杂多变的业务场景, 可将代码持久化到数据库, 在执行时直接执行数据库脚本达到动态更新效果</p>
+<h2 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h2><h3 id="pom"><a href="#pom" class="headerlink" title="pom"></a>pom</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.codehaus.groovy<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>groovy<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;groovy.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="查看-JKS-生成的证书详细信息"><a href="#查看-JKS-生成的证书详细信息" class="headerlink" title="查看 JKS 生成的证书详细信息"></a>查看 JKS 生成的证书详细信息</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -list -v -keystore xxx.jks</span><br></pre></td></tr></table></figure>
+<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 抽象类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">TestHandler</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> String <span class="title function_">testHandler</span><span class="params">(String str)</span> <span class="keyword">throws</span> Exception;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="导出-cer-证书"><a href="#导出-cer-证书" class="headerlink" title="导出 cer 证书"></a>导出 cer 证书</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -alias *** -exportcert -keystore xxx.jks -file xxx.cer</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testAll</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    <span class="type">GroovyClassLoader</span> <span class="variable">groovyClassLoader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">GroovyClassLoader</span>();</span><br><span class="line">    Class&lt;?&gt; clazz = groovyClassLoader.parseClass(</span><br><span class="line">            <span class="string">&quot;package com.loger.java.test;\n&quot;</span> +</span><br><span class="line">                    <span class="string">&quot;\n&quot;</span> +</span><br><span class="line">                    <span class="string">&quot;import com.loger.java.test.TestHandler;\n&quot;</span> +</span><br><span class="line">                    <span class="string">&quot;\n&quot;</span> +</span><br><span class="line">                    <span class="string">&quot;public class DemoTestHandler extends TestHandler &#123;\n&quot;</span> +</span><br><span class="line">                    <span class="string">&quot;\n&quot;</span> +</span><br><span class="line">                    <span class="string">&quot;\t@Override\n&quot;</span> +</span><br><span class="line">                    <span class="string">&quot;\tpublic String testHandler(String str) throws Exception &#123;\n&quot;</span> +</span><br><span class="line">                    <span class="string">&quot;      return str;\n&quot;</span> +</span><br><span class="line">                    <span class="string">&quot;\t&#125;\n&quot;</span> +</span><br><span class="line">                    <span class="string">&quot;  \n&quot;</span> +</span><br><span class="line">                    <span class="string">&quot;\n&quot;</span> +</span><br><span class="line">                    <span class="string">&quot;&#125;\n&quot;</span>);</span><br><span class="line">    <span class="type">TestHandler</span> <span class="variable">testHandler</span> <span class="operator">=</span> (TestHandler) clazz.newInstance();</span><br><span class="line">    System.out.println(testHandler.testHandler(<span class="string">&quot;有参测试 !!!&quot;</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="导出公钥-此处命令需要-OpenSSL-并配置环境变量"><a href="#导出公钥-此处命令需要-OpenSSL-并配置环境变量" class="headerlink" title="导出公钥, 此处命令需要 OpenSSL , 并配置环境变量"></a>导出公钥, 此处命令需要 OpenSSL , 并配置环境变量</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -list -rfc --keystore xxx.jks | openssl x509 -inform pem -pubkey</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/logerJava/los/main/picture/KeyTool%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5.png" alt="keytools生成密钥"></p>
-<p>拷贝出公钥</p>
+<p>通过 GroovyClassLoader 中的 parseClass 方法, 编译加载 Groovy 脚本(可支持纯 Java 代码), 脱离 Java 的双亲委派模型</p>
+<p>通过反射构建对象, 执行方法</p>
 
       
     </div>
@@ -366,7 +363,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://logerjava.github.io/2022/11/09/KeyTool-%E5%B7%A5%E5%85%B7%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5%E5%AF%B9/" title="KeyTool 工具生成密钥对" target="_blank" rel="external">http://logerjava.github.io/2022/11/09/KeyTool-工具生成密钥对/</a>
+      <a href="http://logerjava.github.io/2022/11/11/GroovyClassLoader-%E4%BB%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%8A%A0%E8%BD%BD%E8%A7%A3%E6%9E%90%E4%BB%A3%E7%A0%81/" title="GroovyClassLoader 从字符串中加载解析代码" target="_blank" rel="external">http://logerjava.github.io/2022/11/11/GroovyClassLoader-从字符串中加载解析代码/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -413,12 +410,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2022/11/11/GroovyClassLoader-%E4%BB%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%8A%A0%E8%BD%BD%E8%A7%A3%E6%9E%90%E4%BB%A3%E7%A0%81/" title="GroovyClassLoader 从字符串中加载解析代码"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+      <a href="/2022/11/11/LiteFlow-%E5%A4%8D%E6%9D%82%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E8%A7%A3%E8%80%A6/" title="LiteFlow 复杂业务逻辑解耦"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2022/11/09/Linux-%E5%AE%89%E8%A3%85-JDK/" title="Linux 安装 JDK"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2022/11/09/KeyTool-%E5%B7%A5%E5%85%B7%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5%E5%AF%B9/" title="KeyTool 工具生成密钥对"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
