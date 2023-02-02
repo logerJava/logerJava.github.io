@@ -25,13 +25,13 @@
 <meta property="og:site_name" content="logerJava">
 <meta property="og:description" content="生成 JKS1keytool -genkeypair -alias *** -keyalg RSA -keypass *** -keystore xxx.jks -storepass *** -keystore xxx.jks  查看 JKS 生成的证书详细信息1keytool -list -v -keystore xxx.jks  导出 cer 证书1keytool -alias *** -ex">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/logerJava/los/main/picture/KeyTool%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5.png">
+<meta property="og:image" content="https://loger-img.oss-cn-beijing.aliyuncs.com/img/KeyTool%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5.png">
 <meta property="article:published_time" content="2022-11-09T05:56:50.000Z">
-<meta property="article:modified_time" content="2022-11-09T06:06:56.971Z">
+<meta property="article:modified_time" content="2023-02-02T07:17:39.535Z">
 <meta property="article:author" content="loger">
 <meta property="article:tag" content="Tools">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/logerJava/los/main/picture/KeyTool%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5.png">
+<meta name="twitter:image" content="https://loger-img.oss-cn-beijing.aliyuncs.com/img/KeyTool%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5.png">
   <!-- Canonical links -->
   <link rel="canonical" href="http://logerjava.github.io/2022/11/09/KeyTool-%E5%B7%A5%E5%85%B7%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5%E5%AF%B9/index.html">
   
@@ -355,7 +355,7 @@
 
 <h3 id="导出公钥-此处命令需要-OpenSSL-并配置环境变量"><a href="#导出公钥-此处命令需要-OpenSSL-并配置环境变量" class="headerlink" title="导出公钥, 此处命令需要 OpenSSL , 并配置环境变量"></a>导出公钥, 此处命令需要 OpenSSL , 并配置环境变量</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -list -rfc --keystore xxx.jks | openssl x509 -inform pem -pubkey</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/logerJava/los/main/picture/KeyTool%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5.png" alt="keytools生成密钥"></p>
+<p><img src="https://loger-img.oss-cn-beijing.aliyuncs.com/img/KeyTool%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5.png" alt="keytools生成密钥"></p>
 <p>拷贝出公钥</p>
 
       
