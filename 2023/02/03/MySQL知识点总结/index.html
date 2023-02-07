@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>MySQL知识点总结 | logerJava</title>
+  <meta name="description" content="逻辑架构 如上图, 我们可以分为三层来进行解读 :  第一层的服务其实并不是 MySQL 独有的, 大多数的基于网络的客户端 &#x2F; 服务器的工具都有类似架构, 例如连接处理, 授权认证等 第二层是 MySQL 的核心服务, 大多数的 MySQL 功能都在这一层, 包括查询解析, 分析, 优化, 内置函数等, 所有跨存储引擎的功能也都在这一层实现 : 存储过程, 触发器, 视图等 第三层包含">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL知识点总结">
+<meta property="og:url" content="http://logerjava.github.io/2023/02/03/MySQL%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="logerJava">
+<meta property="og:description" content="逻辑架构 如上图, 我们可以分为三层来进行解读 :  第一层的服务其实并不是 MySQL 独有的, 大多数的基于网络的客户端 &#x2F; 服务器的工具都有类似架构, 例如连接处理, 授权认证等 第二层是 MySQL 的核心服务, 大多数的 MySQL 功能都在这一层, 包括查询解析, 分析, 优化, 内置函数等, 所有跨存储引擎的功能也都在这一层实现 : 存储过程, 触发器, 视图等 第三层包含">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/logerJava/los/main/picture/Mysql%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/logerJava/los/main/picture/BTree%E7%A4%BA%E4%BE%8B.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/logerJava/los/main/picture/BTree%E7%A4%BA%E4%BE%8B.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/logerJava/los/main/picture/%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/logerJava/los/main/picture/%E5%A4%8D%E5%90%88%E7%B4%A2%E5%BC%95.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/logerJava/los/main/picture/MySQL%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3.png">
+<meta property="article:published_time" content="2023-02-03T05:11:24.000Z">
+<meta property="article:modified_time" content="2023-02-07T09:07:58.651Z">
+<meta property="article:author" content="loger">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/logerJava/los/main/picture/Mysql%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://logerjava.github.io/2023/02/03/MySQL%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="logerJava" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/logerJava" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">loger</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Software Engineer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Beijing, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/logerJava" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>最近在转移公众号文章到博客, 想看更多目前建议去公众号或者访问 github 的 loger 项目有文章目录</p> <img src="/images/logerJava.png" width="200" height="200">
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nacos/" rel="tag">Nacos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" rel="tag">消息队列</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Java/" style="font-size: 14px;">Java</a> <a href="/tags/Linux/" style="font-size: 13.5px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 14px;">MySQL</a> <a href="/tags/Nacos/" style="font-size: 13px;">Nacos</a> <a href="/tags/Tools/" style="font-size: 13px;">Tools</a> <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" style="font-size: 13px;">消息队列</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2023/02/03/MySQL%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/" class="title">MySQL知识点总结</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-02-03T05:11:24.000Z" itemprop="datePublished">2023-02-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2023/02/01/%E9%9B%86%E5%90%88%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E9%99%84%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" class="title">集合知识点总结(附源码解析)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-02-01T02:30:03.000Z" itemprop="datePublished">2023-02-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2022/11/11/LiteFlow-%E5%A4%8D%E6%9D%82%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E8%A7%A3%E8%80%A6/" class="title">LiteFlow 复杂业务逻辑解耦</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-11-11T02:31:01.000Z" itemprop="datePublished">2022-11-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2022/11/11/GroovyClassLoader-%E4%BB%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%8A%A0%E8%BD%BD%E8%A7%A3%E6%9E%90%E4%BB%A3%E7%A0%81/" class="title">GroovyClassLoader 从字符串中加载解析代码</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-11-11T02:28:39.000Z" itemprop="datePublished">2022-11-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2022/11/09/KeyTool-%E5%B7%A5%E5%85%B7%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5%E5%AF%B9/" class="title">KeyTool 工具生成密钥对</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-11-09T05:56:50.000Z" itemprop="datePublished">2022-11-09</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-MySQL知识点总结" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MySQL知识点总结
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/02/03/MySQL%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/" class="article-date">
+	  <time datetime="2023-02-03T05:11:24.000Z" itemprop="datePublished">2023-02-03</time>
+	</a>
+</span>
+        
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/MySQL/" rel="tag">MySQL</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/02/03/MySQL%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 7.8k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 28(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="逻辑架构"><a href="#逻辑架构" class="headerlink" title="逻辑架构"></a>逻辑架构</h1><p><img src="https://raw.githubusercontent.com/logerJava/los/main/picture/Mysql%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84.png" alt="Mysql逻辑架构"></p>
+<p>如上图, 我们可以分为三层来进行解读 :</p>
+<ul>
+<li>第一层的服务其实并不是 MySQL 独有的, 大多数的基于网络的客户端 &#x2F; 服务器的工具都有类似架构, 例如连接处理, 授权认证等</li>
+<li>第二层是 MySQL 的核心服务, 大多数的 MySQL 功能都在这一层, 包括查询解析, 分析, 优化, 内置函数等, 所有跨存储引擎的功能也都在这一层实现 : 存储过程, 触发器, 视图等</li>
+<li>第三层包含了存储引擎, 负责 MySQL 中数据的存储和提取, 不同的存储引擎具有不同的优势和劣势, 服务器则通过 API 与存储引擎进行通信, 这些 API 屏蔽了不同存储引擎的差异</li>
+</ul>
+<h1 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h1><h2 id="B-Tree-原理"><a href="#B-Tree-原理" class="headerlink" title="B+Tree 原理"></a>B+Tree 原理</h2><h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><p>B Tree 指的是 Balance Tree，也就是平衡树。平衡树是一颗查找树，并且所有叶子节点位于同一层。</p>
+<p>B+ Tree 是基于 B Tree 和叶子节点顺序访问指针进行实现，它具有 B Tree 的平衡性，并且通过顺序访问指针来提高区间查询的性能。</p>
+<p>在 B+ Tree 中，一个节点中的 key 从左到右非递减排列，如果某个指针的左右相邻 key 分别是 keyi 和 keyi+1，且不为 null，则该指针指向节点的所有 key 大于等于 keyi 且小于等于 keyi+1。</p>
+<p><img src="https://raw.githubusercontent.com/logerJava/los/main/picture/BTree%E7%A4%BA%E4%BE%8B.png" alt="BTree示例"></p>
+<p>ps ：旧金山大学数据结构模拟工具 <a target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">Data Structure Visualizations</a></p>
+<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><p>进行查找操作时，首先在根节点进行二分查找，找到一个 key 所在的指针，然后递归地在指针所指向的节点进行查找。直到查找到叶子节点，然后在叶子节点上进行二分查找，找出 key 所对应的 data。</p>
+<p>插入删除操作会破坏平衡树的平衡性，因此在进行插入删除操作之后，需要对树进行分裂、合并、旋转等操作来维护平衡性。</p>
+<h3 id="与红黑树的比较"><a href="#与红黑树的比较" class="headerlink" title="与红黑树的比较"></a>与红黑树的比较</h3><p>红黑树等平衡树也可以用来实现索引，但是文件系统及数据库系统普遍采用 B+ Tree 作为索引结构，这是因为使用 B+ 树访问磁盘数据有更高的性能</p>
+<h5 id="1-B-树有更低的树高"><a href="#1-B-树有更低的树高" class="headerlink" title="1. B+ 树有更低的树高"></a>1. B+ 树有更低的树高</h5><p>平衡树的树高 O(h)&#x3D;O(logdN)，其中 d 为每个节点的出度。红黑树的出度为 2，而 B+ Tree 的出度一般都非常大，所以红黑树的树高 h 很明显比 B+ Tree 大非常多</p>
+<h5 id="2-磁盘访问原理"><a href="#2-磁盘访问原理" class="headerlink" title="2. 磁盘访问原理"></a>2. 磁盘访问原理</h5><p>操作系统一般将内存和磁盘分割成固定大小的块，每一块称为一页，内存与磁盘以页为单位交换数据。数据库系统将索引的一个节点的大小设置为页的大小，使得一次 I&#x2F;O 就能完全载入一个节点</p>
+<p>如果数据不在同一个磁盘块上，那么通常需要移动制动手臂进行寻道，而制动手臂因为其物理结构导致了移动效率低下，从而增加磁盘数据读取时间。B+ 树相对于红黑树有更低的树高，进行寻道的次数与树高成正比，在同一个磁盘块上进行访问只需要很短的磁盘旋转时间，所以 B+ 树更适合磁盘数据的读取</p>
+<h5 id="3-磁盘预读特性"><a href="#3-磁盘预读特性" class="headerlink" title="3. 磁盘预读特性"></a>3. 磁盘预读特性</h5><p>为了减少磁盘 I&#x2F;O 操作，磁盘往往不是严格按需读取，而是每次都会预读。预读过程中，磁盘进行顺序读取，顺序读取不需要进行磁盘寻道，并且只需要很短的磁盘旋转时间，速度会非常快。并且可以利用预读特性，相邻的节点也能够被预先载入</p>
+<h2 id="MySQL-索引"><a href="#MySQL-索引" class="headerlink" title="MySQL 索引"></a>MySQL 索引</h2><p>索引是在存储引擎层实现的，而不是在服务器层实现的，所以不同存储引擎具有不同的索引类型和实现</p>
+<h3 id="B-Tree-索引"><a href="#B-Tree-索引" class="headerlink" title="B+ Tree 索引"></a>B+ Tree 索引</h3><p>B+ Tree 索引是大多数 MySQL 存储引擎的默认索引类型</p>
+<p>因为不需要进行全表扫描，只需要对树进行搜索即可，所以查找速度快很多</p>
+<p>因为 B+ Tree 的有序性，所以除了用于查找，还可以用于排序和分组</p>
+<p>可以指定多个列作为索引列，多个索引列共同组成键</p>
+<p>适用于全键值、键值范围和键前缀查找，其中键前缀查找只适用于最左前缀查找；如果不是按照索引列的顺序进行查找，则无法使用索引</p>
+<p>InnoDB 的 B+ Tree 索引分为主索引和辅助索引。主索引的叶子节点 data 域记录着完整的数据记录，这种索引方式被称为聚簇索引。因为无法把数据行存放在两个不同的地方，所以一个表只能有一个聚簇索引</p>
+<p>辅助索引（二级索引）的叶子节点的 data 域记录着主键的值，因此在使用辅助索引进行查找时，需要先查找到主键值，然后再到主索引中进行查找</p>
+<h4 id="1-聚簇索引"><a href="#1-聚簇索引" class="headerlink" title="1. 聚簇索引"></a>1. 聚簇索引</h4><p>聚簇索引在表建立时就已经建立了，举一个例子：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> studentId <span class="operator">=</span> <span class="number">6</span></span><br></pre></td></tr></table></figure>
+
+<p>要查询学生表中 id 为 6 的学员全部信息，当没有聚簇索引的情况下，也就是无序情况下，需要进行全表查询才能找到，此处可能会有疑问，既然主键是自增的那么不可以用二分查找解决吗 ？</p>
+<p>答案是不可以的，试想如果数据在写入磁盘时是 1、2、3、4、5、6 的形式，此时我删除了 4，那么如何将 5 向前移动呢 ？如果没有维护一个有序的数组结构，那么数据在磁盘就认为它是无序的，如果维护了一个有序的数组那么也是建立了索引，只不过换了一种数据结果</p>
+<p>当创建了聚簇索引，其情况如下：</p>
+<p><img src="https://raw.githubusercontent.com/logerJava/los/main/picture/BTree%E7%A4%BA%E4%BE%8B.png" alt="BTree示例"></p>
+<p>数据库里面有 1, 2, 3, 4, 5, 6 个学生 :</p>
+<ul>
+<li>从上到下查找, 在根节点进行二分查找, 找到一个 studentId 所在的指针, 这里指向右侧</li>
+<li>在叶子节点上进行二分查找, 找到 studentId &#x3D; 6 对应的 data</li>
+</ul>
+<p>聚簇索引是无论如何都会创建的, 如果设定了主键, 则主键是聚簇索引, 如果没有设定主键会寻找唯一键作为索引, 就算你连唯一键都没有也没关系, MySQL 会建立一个 <strong>rowid</strong> 字段, 来完成 B+ Tree</p>
+<h4 id="2-二级索引"><a href="#2-二级索引" class="headerlink" title="2. 二级索引"></a>2. 二级索引</h4><p>在查询时我们并不能总是知道主键，所以也会用姓名、手机号等作为查询条件，而在聚簇索引中并没有这两项，这就需要建立辅助索引（二级索引）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX idx_studentName <span class="keyword">ON</span> student(studentName)</span><br></pre></td></tr></table></figure>
+
+<p>建立学生姓名索引会新创建一个 B+ Tree，里面存储学生姓名，data 存储着主键 id</p>
+<p><img src="https://raw.githubusercontent.com/logerJava/los/main/picture/%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95.png" alt="二级索引"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> studentName <span class="operator">=</span> <span class="string">&#x27;F&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>当在二级索引中查询姓名为 F 的学员时：</p>
+<ul>
+<li>二分查找, 找到对应指针</li>
+<li>会在 B+ Tree 中找到 key 是 F 的记录</li>
+<li>二级索引的 data 域中存储的是主键id, 那么就拿到主键 id</li>
+<li>因为是查询全部字段, 所以用主键 id 到聚簇索引中进行查找</li>
+</ul>
+<h4 id="3-复合索引"><a href="#3-复合索引" class="headerlink" title="3. 复合索引"></a>3. 复合索引</h4><p>复合索引同样属于二级索引的范畴，而又不太相同</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX idx_studentName_age <span class="keyword">ON</span> student(studentName,age)</span><br></pre></td></tr></table></figure>
+
+<p>当建立复合索引时，会再次新创建一个 B+ Tree</p>
+<p><img src="https://raw.githubusercontent.com/logerJava/los/main/picture/%E5%A4%8D%E5%90%88%E7%B4%A2%E5%BC%95.png" alt="复合索引"></p>
+<p>此时索引的 key 中存在有姓名和年龄，其他查询步骤与二级索引相同，需要注意的是如上图中，姓名 E 的 14 岁学员，姓名 E 的 15 岁学员，同名不同年龄，<strong>那么在排序比较时，会先按照姓名比较，如果姓名相同再按照年龄比较</strong></p>
+<h3 id="哈希索引"><a href="#哈希索引" class="headerlink" title="哈希索引"></a>哈希索引</h3><p>哈希索引可以以 O(1) 时间进行查找，但是失去了有序性：</p>
+<ul>
+<li>无法用于排序与分组</li>
+<li>只支持精确查找，无法用于部分查找和范围查找</li>
+</ul>
+<p>InnoDB 存储引擎有一个特殊的功能叫 “自适应哈希索引”，当某个索引值被使用的非常频繁时，会在 B+ Tree 索引之上再创建一个哈希索引，这样就可以让 B+ Tree 索引具有哈希索引的一些优点，比如更快的哈希查找</p>
+<h3 id="全文索引"><a href="#全文索引" class="headerlink" title="全文索引"></a>全文索引</h3><p>MyISAM 存储引擎支持全文索引，用于查找文本中的关键词，而不是直接比较是否相等。</p>
+<p>查找条件使用 MATCH AGAINST，而不是普通的 WHERE。</p>
+<p>全文索引使用倒排索引实现，它记录着关键词到其所在文档的映射。</p>
+<p>InnoDB 存储引擎在 MySQL 5.6.4 版本中也开始支持全文索引</p>
+<h3 id="空间数据索引"><a href="#空间数据索引" class="headerlink" title="空间数据索引"></a>空间数据索引</h3><p>MyISAM 存储引擎支持空间数据索引（R-Tree），可以用于地理数据存储。</p>
+<p>空间数据索引会从所有维度来索引数据，可以有效地使用任意维度来进行组合查询。</p>
+<p>必须使用 GIS 相关的函数来维护数据</p>
+<h1 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h1><h2 id="redo-log"><a href="#redo-log" class="headerlink" title="redo log"></a>redo log</h2><p><strong>MySQL 是按页为单位来读取数据的，个页里面有很多行记录，从内存刷数据到磁盘，也是以页为单位来刷</strong></p>
+<h4 id="1-redo-log-的概念"><a href="#1-redo-log-的概念" class="headerlink" title="1. redo log 的概念"></a>1. redo log 的概念</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> student <span class="keyword">SET</span> name <span class="operator">=</span> <span class="string">&#x27;loger&#x27;</span> <span class="keyword">WHERE</span> studentId <span class="operator">=</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>在数据库执行此SQL，MySQL 的操作如下：</p>
+<ul>
+<li>首先判断内存中有没有 studentId &#x3D; 3 的数据</li>
+<li>如果没有就去磁盘找到这条数据所在的页, 将整页数据加载到内存</li>
+<li>然后找到 studentId &#x3D; 3 的行数据, 将内存中的 name 修改为 loger</li>
+</ul>
+<p>我们可以发现数据存在不一致的情况，内存中的数据为正确的修改过后的新数据，磁盘中的数据为未修改的旧数据，此时磁盘对应的页的数据称为<strong>脏页</strong></p>
+<blockquote>
+<p>内存修改而磁盘未修改时掉电 MySQL 是怎么解决的 ？</p>
+<p>基于这种场景 MySQL 的解决方案是将对页的操作、修改内容，记录下来保存到磁盘，也就是 redo log，在 redo log 写入成功后，MySQL 就认为十五已经提交成功且数据已经持久化，并会在空闲时间将内存数据刷入磁盘；如果此时掉电，只需在重启后将<strong>脏页</strong>数据加载到内存中，然后利用 redo log 脏页就会修正了</p>
+</blockquote>
+<h4 id="2-redo-log-如何存储"><a href="#2-redo-log-如何存储" class="headerlink" title="2. redo log 如何存储"></a>2. redo log 如何存储</h4><p><img src="https://raw.githubusercontent.com/logerJava/los/main/picture/MySQL%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3.png" alt="MySQL官方文档"></p>
+<p>根据 MySQL 的官方文档可以大致分析处如下几点：</p>
+<ul>
+<li>redo log 记录了 SQL 语句以及其他 API 对表产生的变化, 也就是<strong>物理变化</strong></li>
+<li>redo log 存储在磁盘, 用于 crash recovery 后修正数据, 也就是处理宕机, 掉电等问题</li>
+<li>redo log 默认有两个文件</li>
+<li>redo log 采取循环写方式 (circular)</li>
+</ul>
+<p>实际上 redo log，默认是在 ib_logfile0 和 ib_logfile1 循环来回写的</p>
+<p><strong>redo log 在写入磁盘时并不是随机 I&#x2F;O 而是顺序 I&#x2F;O 所以写入速度很快, 并且 redo log 文件体积又很小, 所以恢复速度很快</strong></p>
+<h2 id="binlog"><a href="#binlog" class="headerlink" title="binlog"></a>binlog</h2><h4 id="1-binlog-的概念"><a href="#1-binlog-的概念" class="headerlink" title="1. binlog 的概念"></a>1. binlog 的概念</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> student <span class="keyword">SET</span> name <span class="operator">=</span> <span class="string">&#x27;loger&#x27;</span> <span class="keyword">WHERE</span> studentId <span class="operator">=</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>在执行这条 SQL 语句时，不仅仅生成了 redo log，还生成了 binlog</p>
+<p><strong>binlog 记录了数据库表结构和表数据变更, 比如 insert, delete, update, create 等, 不会记录查询</strong></p>
+<p>不同于 redo log，binlog 是 MySQL 在 Server 层的功能，而 redo log 则是 InnoDB 存储引擎的功能，也就是说 redo log 只要使用了 InnoDB 作为存储引擎就会有，而 binlog 只要是使用 MySQL 就会有</p>
+<h4 id="2-binlog-的作用"><a href="#2-binlog-的作用" class="headerlink" title="2. binlog 的作用"></a>2. binlog 的作用</h4><p>MySQL 既然将 binlog 放在了 Server 层，就代表 binlog 提供了通用的能力，binlog 有两个作用：</p>
+<ul>
+<li><p><strong>数据恢复</strong></p>
+<p>找到前一时间点的 binlog 进行重放就可以恢复数据</p>
+</li>
+<li><p><strong>主从复制</strong></p>
+<p>master 将 binlog 发送给 slave，slave 执行 binlog 那么就复制了</p>
+</li>
+</ul>
+<h2 id="对比-redo-log-与-binlog"><a href="#对比-redo-log-与-binlog" class="headerlink" title="对比 redo log 与 binlog"></a>对比 redo log 与 binlog</h2><p>redo log 和 binlog 都可以作为恢复手段，但其实他们的细节部分还是不一样的</p>
+<h5 id="1-存储内容不同"><a href="#1-存储内容不同" class="headerlink" title="1. 存储内容不同"></a>1. 存储内容不同</h5><p>binlog 记录的是 insert、delete、update、create 等 SQL 语句，而 redo log 记录的是物理修改内容，可以理解为，<strong>binlog 记录的是逻辑变化，redo log 记录的是物理变化</strong></p>
+<h5 id="2-功能不同"><a href="#2-功能不同" class="headerlink" title="2. 功能不同"></a>2. 功能不同</h5><p>redo log 写入内存，如果数据库宕机，可以通过 redo log 恢复内存还没有刷盘的数据，也就是可以恢复宕机之前的内存数据</p>
+<p>binlog 可以保持主从一致性，如果整个数据库都被删除了，binlog 存储着所有数据的变更情况，可以通回放 binlog 进行恢复</p>
+<p>需要注意，如果整个数据库都被删除了，redo log 是无法恢复的，因为 redo log 并不会记录历史的所有数据，文件内容会被覆盖</p>
+<h2 id="两段式提交"><a href="#两段式提交" class="headerlink" title="两段式提交"></a>两段式提交</h2><p>redo log 和 binlog 都会在执行 update 的时候写入，那么是怎么写入的呢 ？</p>
+<ol>
+<li>写入：redo log（prepare）</li>
+<li>写入：binlog</li>
+<li>写入：redo log（commit）</li>
+</ol>
+<p>为什么写入 redo log 需要两段式提交而不是一次性写入呢 ？下面分为两种情况分析</p>
+<p>先写入 redo log 再写入 binlog：</p>
+<ul>
+<li>如果 redo log 写入成功，写入 binlog 失败，此时出现宕机情况需要恢复数据，主从复制情况下，master 采用 redo log 恢复数据，从库采用 binlog，但是 binlog 写入失败不存在 binlog，那么从库就没有这些数据，导致主从不一致</li>
+</ul>
+<p>先写入 binlog 再写入 redo log：</p>
+<ul>
+<li>与上面情况实际是相同的，binlog 存在而 redo log 不存在，导致从库是最新数据，而主库出现问题</li>
+</ul>
+<p>两段式提交：</p>
+<ul>
+<li>写入 redo log，若失败则回滚，不再继续写入 binlog</li>
+<li>若 redo log 写入成功，binlog 写入失败则回滚，删除无效的 binlog</li>
+<li>只有当 redo log 和 binlog 都写入成功此次事务才会提交</li>
+</ul>
+<p>可以看出 MySQL 需要保证 redo log 和 binlog 是一致的</p>
+<h2 id="undo-log"><a href="#undo-log" class="headerlink" title="undo log"></a>undo log</h2><p><strong>undo log 主要负责回滚与多版本控制（MVCC）</strong></p>
+<p>跳转MVCC</p>
+<p>undo log 实际上存储的也是逻辑日志，在执行 update 时不仅记录 redo log 与 binlog，undo log 也会进行记录，比如用户进行插入操作，那么 undo log 就会记录一条删除操作；若用户将 A 修改为了 B，则 undo log 就会记录一条 B 修改为 A 的记录</p>
+<p>其目的就是为了保证回滚，这些 undo log 存储的记录就相当于之前 SQL 前的一个版本，回滚时直接返回上一个版本</p>
+<h2 id="error-log"><a href="#error-log" class="headerlink" title="error log"></a>error log</h2><p>错误日志, 记录着 MySQL 启动, 运行期间, 停止时的错误相关信息, 默认情况下是关闭的</p>
+<p>可以指定 errorlog 的输出路径 :</p>
+<ul>
+<li>编辑 my.cnf 写入 log-error &#x3D; [path]</li>
+<li>通过命令参数错误日志 mysqld_safe –user&#x3D;mysql –log-error&#x3D;[path] &amp;</li>
+</ul>
+<h2 id="general-query-log"><a href="#general-query-log" class="headerlink" title="general query log"></a>general query log</h2><p>普通查询日志, 记录了 MySQL 接收到的所有查询或命令操作, 无论是正确还是错误的都会进行记录, 因为记录的比较频繁, 产生开销较大所以默认是关闭的</p>
+<h2 id="slow-query-log"><a href="#slow-query-log" class="headerlink" title="slow query log"></a>slow query log</h2><p>慢查询日志记录的是执行时间超过 long_query_time 和没有使用索引的查询语句, <strong>只记录成功的语句</strong></p>
+<p>相关参数 :</p>
+<ul>
+<li>slow_query_log : 1. 开启; 0. 关闭</li>
+<li>long_query_time : 慢查询阈值</li>
+<li>log_output : 输出方式</li>
+</ul>
+<p>通过如下方式配置慢查询 :</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;%slow_query_log%&#x27;</span>;</span><br><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> slow_query_log <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;%slow_query_log%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>要注意的是, 此处修改只对当前数据库生效, 在 MySQL 重启后会失效, 如果需要配置永久生效需要修改 my.cnf 文件</p>
+<h1 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h1><h2 id="MySQL-中锁的分类"><a href="#MySQL-中锁的分类" class="headerlink" title="MySQL 中锁的分类"></a>MySQL 中锁的分类</h2><p>因为不同的存储引擎支持的锁机制是不同的，以下内容仅就 MyISAM 与 InnoDB 进行解析</p>
+<p><strong>需要注意 MyISAM 存储引擎仅支持表锁, InnoDB存储引擎既支持行级锁，也支持表级锁，但默认情况下是采用行级锁</strong></p>
+<h3 id="1-MyISAM-中的表锁"><a href="#1-MyISAM-中的表锁" class="headerlink" title="1. MyISAM 中的表锁"></a>1. MyISAM 中的表锁</h3><p>MyISAM 中的表锁可以分为两种：</p>
+<ul>
+<li>表共享锁（Table Read Lock）：不会阻塞其他用户对同一张表的读请求，但会阻塞对同一张表的写请求</li>
+<li>表独占锁（Table Write Lock）：会阻塞其他用户对同一张表的读写操作</li>
+</ul>
+<p>MyISAM 表的读写是串行操作，当一个线程获得一个表的写锁后，只有持有锁的线程才可以对表进行更新操作，其他线程的读写操作都会阻塞，直到锁被释放</p>
+<p>默认情况下，写锁优先级高于读锁，若存在锁争抢情况，在上一个锁被释放时会优先给写锁队列中等待的请求，然后再分配给读锁队列等待的请求</p>
+<p>这也是 MyISAM 存储引擎的表不适合大量更新、查询操作的原因，在大量更新操作时，会导致查询操作难以获取读锁有可能出现一致阻塞的情况，并且时间较长的查询会导致写操作线程”饿死”，所以应用程序中应避免出现运行时间较长的查询操作</p>
+<p>在 MyISAM 存储引擎中我们可以通过参数配置修改读写锁的优先级：</p>
+<ul>
+<li>low-priority-updates : 配置默认给读请求优先权</li>
+<li>执行 set low-priority-updates &#x3D; 1 命令, 让该连接发出的更新请求优先级降低</li>
+<li>指定 insert、update、delete 语句的 low_priority 属性, 降低执行语句的优先级</li>
+<li>设置系统参数 max_write_lock_count 的值, 当表的读锁达到这个值后, MySQL 会暂时性的降低写请求的优先级, 从而使读进程获取锁</li>
+</ul>
+<h3 id="2-查询表锁争用情况"><a href="#2-查询表锁争用情况" class="headerlink" title="2. 查询表锁争用情况"></a>2. 查询表锁争用情况</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SHOW</span> STATUS <span class="keyword">LIKE</span> <span class="string">&#x27;Table%&#x27;</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------------+---------+</span></span><br><span class="line"><span class="operator">|</span> Variable_name <span class="operator">|</span> <span class="keyword">Value</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------------+---------+</span></span><br><span class="line"><span class="operator">|</span> Table_locks_immediate <span class="operator">|</span> <span class="number">34800596</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> Table_locks_waited <span class="operator">|</span> <span class="number">0</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------------------+---------+</span></span><br></pre></td></tr></table></figure>
+
+<p>可以通过 table_locks_waited 和 table_locks_immediate 来分析表锁的争用情况, 如果 table_locks_immediate 数值较高, 则可以认为存在严重的锁竞争情况</p>
+<h3 id="3-InnoDB-中的锁"><a href="#3-InnoDB-中的锁" class="headerlink" title="3. InnoDB 中的锁"></a>3. InnoDB 中的锁</h3><p>在 InnoDB 中行锁和表锁是共存的, 它实现了如下两种行锁：</p>
+<ul>
+<li>共享锁 (S) : 允许一个事务去读一行, 阻止其他事务获得相同数据集的排他锁</li>
+<li>排他锁 (X) : 允许获得排他锁的事务更新数据, 阻止其他事务取得相同数据集的共享读锁和排他写锁</li>
+</ul>
+<p>而为了兼容表锁和行锁, 实现多粒度的锁, InnoDB 中还存在两种意向锁, 这两种都是表锁：</p>
+<ul>
+<li>意向共享锁 (IS) : 事务打算给数据行加行共享锁, 事务在给一个数据行加共享锁前必须先取得该表的意向共享锁</li>
+<li>意向排他锁 (IX) : 事务打算给数据行加行排他锁，事务在给一个数据行加排他锁前必须先取得该表的意向排他锁</li>
+</ul>
+<p>锁兼容情况表：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>共享锁</th>
+<th>排他锁</th>
+<th>意向共享锁</th>
+<th>意向排他锁</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>共享锁</td>
+<td>兼容</td>
+<td>冲突</td>
+<td>兼容</td>
+<td>冲突</td>
+</tr>
+<tr>
+<td>排他锁</td>
+<td>冲突</td>
+<td>冲突</td>
+<td>冲突</td>
+<td>冲突</td>
+</tr>
+<tr>
+<td>意向共享锁</td>
+<td>兼容</td>
+<td>冲突</td>
+<td>兼容</td>
+<td>兼容</td>
+</tr>
+<tr>
+<td>意向排他锁</td>
+<td>冲突</td>
+<td>冲突</td>
+<td>兼容</td>
+<td>兼容</td>
+</tr>
+</tbody></table>
+<p>若一个事务请求的锁与当前的锁是兼容的, InnoDB 就会把请求的锁给到该事务; 相反, 若两者不兼容, 那么该事务就要等待锁的释放</p>
+<h3 id="4-InnoDB-加锁方法"><a href="#4-InnoDB-加锁方法" class="headerlink" title="4. InnoDB 加锁方法"></a>4. InnoDB 加锁方法</h3><p>加锁情况：</p>
+<ul>
+<li>对于意向锁是 InnoDB 自动加的, 不需用户干预</li>
+<li>对于 insert, update, delete 语句, InnoDB 会自动给涉及数据加上排他锁</li>
+<li>对于 select 语句, InnoDB 不会进行加锁操作</li>
+</ul>
+<p>也可以通过如下语句显示的加排他锁和共享锁：</p>
+<ul>
+<li>select … from 表名 where … lock in share mode ：其他会话仍然可以查询本条记录, 并且可以加 share mode 的共享锁, 但是如果需要对该记录进行更新, 那么就会有可能造成死锁</li>
+<li>select … from 表名 where … for update ：其他会话可以查询该记录, 但是不能对此记录加排他锁, 共享锁, 而是阻塞等待获取锁</li>
+</ul>
+<h3 id="5-隐式锁定与显示锁定"><a href="#5-隐式锁定与显示锁定" class="headerlink" title="5. 隐式锁定与显示锁定"></a>5. 隐式锁定与显示锁定</h3><h4 id="1-隐式锁定"><a href="#1-隐式锁定" class="headerlink" title="1. 隐式锁定"></a>1. 隐式锁定</h4><p>InnoDB 在事务执行时, 采用两阶段锁协议 :</p>
+<ul>
+<li>在任何时间都可以执行锁定, InnoDB 会根据隔离级别自动加锁</li>
+<li>锁只有在提交和回滚的时候才会在<strong>同一时间</strong>释放</li>
+</ul>
+<h4 id="2-显示锁定"><a href="#2-显示锁定" class="headerlink" title="2. 显示锁定"></a>2. 显示锁定</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 共享锁</span></span><br><span class="line"><span class="keyword">select</span> ... lock <span class="keyword">in</span> share mode</span><br><span class="line"><span class="comment">-- 排他锁</span></span><br><span class="line"><span class="keyword">select</span> ... <span class="keyword">for</span> <span class="keyword">update</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>select … for update :</strong></p>
+<p>我们一般在确保查询的是最新数据时会用到 for update, 在执行加了 for update 的查询语句时, 会将对查询行加排他锁, 也就是说只允许自己进行修改</p>
+<p><strong>select … lock in share mode :</strong></p>
+<p>在使用 lock in share mode 时, 会对查询数据加共享锁, 同样是为了确保最新数据, 不允许其他用户进行修改, 但同样的自己也不一定能修改这条数据, 因为有可能其他事务也存在对相同数据添加 lock in share mode 的情况</p>
+<blockquote>
+<p>上面两种锁的区别：</p>
+<p>for update 为排他锁, 事务一旦获取此锁, 其他数据无法再在同样数据上添加 for update</p>
+<p>lock in share mode 是共享锁, 多个事务可以同时对同样数据添加 lock in share mode</p>
+</blockquote>
+<h4 id="3-性能影响"><a href="#3-性能影响" class="headerlink" title="3. 性能影响"></a>3. 性能影响</h4><p>select … for update 语句实际上相当于一个 update 语句, 若事务没有及时提交或回滚的情况下, 有可能造成其他事务长时间等待的问题, 影响数据库的并发效率</p>
+<p>select … lock in share mode 允许同时对数据上共享锁, 但是不能对数据进行更新操作, 同理如果不及时提交和回滚也可能造成大量事务等待问题</p>
+<h3 id="InnoDB-的间隙锁"><a href="#InnoDB-的间隙锁" class="headerlink" title="InnoDB 的间隙锁"></a>InnoDB 的间隙锁</h3><p>在用户使用范围查询而非等值查询并请求锁时，InnoDB 会将符合的已存在数据记录的索引项加锁，对于键值在条件范围内但并不存在的记录，叫做间隙（GAP），InnoDB 同样会对这个”间隙”加锁，这种锁机制就是所谓的间隙锁，<strong>间隙锁只会在 Repeatableread (可重复读) 隔离级别下使用</strong></p>
+<p>用学生表举例，如果 student 表存在 101 条记录，其中 studentId 分别是 1 - 101：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> studentId <span class="operator">&gt;</span> <span class="number">100</span> <span class="keyword">for</span> <span class="keyword">update</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在上面的范围查询中，InnoDB 不仅会对复合条件的 101 进行加锁，还会对 studentId 大于 101 的”间隙”加锁，即便这些记录不存在</p>
+<h3 id="InnoDB-使用间隙锁的目的"><a href="#InnoDB-使用间隙锁的目的" class="headerlink" title="InnoDB 使用间隙锁的目的"></a>InnoDB 使用间隙锁的目的</h3><p>InnoDB 使用间隙锁的目的有两个：</p>
+<ul>
+<li>防止幻读, 在可重复读的隔离级别下, 通过 GAP 锁是可以避免幻读的</li>
+<li>满足恢复和复制的需求</li>
+</ul>
+<p>MySQL 是通过 binlog 回放执行成功的增删改 SQL 语句来进行主从复制和数据恢复的，根据其恢复特点分析恢复和复制的需求：</p>
+<ul>
+<li>binlog 恢复是重放 SQL 语句</li>
+<li>binlog 按照事务提交的先后顺序记录, 回放也是根据这个顺序回放</li>
+</ul>
+<p>可以看出, 在一个事务没有提交之前, 其他并发事务不能插入满足其锁定条件的任何记录, 通俗来讲就是不允许出现幻读</p>
+<h3 id="获取-InnoDB-行锁的争用情况"><a href="#获取-InnoDB-行锁的争用情况" class="headerlink" title="获取 InnoDB 行锁的争用情况"></a>获取 InnoDB 行锁的争用情况</h3><p>通过 innodb_row_lock 变量来分析行锁的争用情况：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">show</span> status <span class="keyword">like</span> <span class="string">&#x27;innodb_row_lock%&#x27;</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------------------+-------+</span></span><br><span class="line"><span class="operator">|</span> Variable_name <span class="operator">|</span> <span class="keyword">Value</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------------------+-------+</span></span><br><span class="line"><span class="operator">|</span> InnoDB_row_lock_current_waits <span class="operator">|</span> <span class="number">0</span> <span class="operator">|</span>  <span class="comment">-- 当前正在等待锁定的数量；</span></span><br><span class="line"><span class="operator">|</span> InnoDB_row_lock_time <span class="operator">|</span> <span class="number">6345955</span> <span class="operator">|</span>  <span class="comment">-- 从系统启动到现在锁定总时间长度；</span></span><br><span class="line"><span class="operator">|</span> InnoDB_row_lock_time_avg <span class="operator">|</span> <span class="number">287</span> <span class="operator">|</span>  <span class="comment">-- 每次等待所花平均时间；</span></span><br><span class="line"><span class="operator">|</span> InnoDB_row_lock_time_max <span class="operator">|</span> <span class="number">51094</span> <span class="operator">|</span>  <span class="comment">-- 从系统启动到现在等待最长的一次所花的时间；</span></span><br><span class="line"><span class="operator">|</span> InnoDB_row_lock_waits <span class="operator">|</span> <span class="number">22069</span> <span class="operator">|</span>  <span class="comment">-- 系统启动后到现在总共等待的次数；</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------------------+-------+</span></span><br><span class="line"><span class="number">5</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.01</span> sec)</span><br></pre></td></tr></table></figure>
+
+<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><h2 id="什么是事务"><a href="#什么是事务" class="headerlink" title="什么是事务"></a>什么是事务</h2><p><strong>概念 : 事务指的是满足 ACID 特性的一组操作，可以通过 Commit 提交一个事务，也可以使用 Rollback 进行回滚</strong></p>
+<p>ACID：</p>
+<ul>
+<li>原子性 : 事务被视为不可分割的最小单元, 事务的所有操作要么全部提交成功, 要么全部失败回滚</li>
+<li>一致性 : 数据库在事务执行前后都保持一致性状态, 在一致性状态下, 所有事务对同一个数据的读取结果都是相同的</li>
+<li>隔离性 : 一个事务所做的修改在最终提交以前, 对其它事务是不可见的</li>
+<li>持久性 : 一旦事务提交, 则其所做的修改将会永远保存到数据库中, 即使系统发生崩溃, 事务执行的结果也不能丢失</li>
+</ul>
+<p>ACID 并非平级关系：</p>
+<ul>
+<li>只有满足一致性的前提下, 事物的执行结果才认为是正确的</li>
+<li>无并发情况下, 事务是串行执行的, 隔离性一定能够满足, 此时只要还满足原子性, 那么就一定能满足一致性</li>
+<li>并发情况下, 多个事务并行执行, 事务不仅要满足原子性, 还要满足隔离性, 才可以满足一致性</li>
+<li>事务满足持久化是为了能应对系统崩溃的情况</li>
+</ul>
+<p>MySQL 默认采用自动提交模式, 这表示, 如果不在 SQL 中显示的使用 <code>START TRANSACTION</code> 语句开始一个事务, 那么每个操作都会被当做一个事务并自动提交</p>
+<h2 id="并发下一致性问题"><a href="#并发下一致性问题" class="headerlink" title="并发下一致性问题"></a>并发下一致性问题</h2><h3 id="1-脏读"><a href="#1-脏读" class="headerlink" title="1. 脏读"></a>1. 脏读</h3><p><strong>脏读问题指事务读取了未提交的数据</strong>, 例如 :</p>
+<ul>
+<li>A 事务修改 id &#x3D; 1 的 name 从 ‘铁蛋’ 修改为 ‘loger’, 但未提交</li>
+<li>随后 B 事务读取 id &#x3D; 1 的数据, 获取数据为 ‘loger’</li>
+<li>如果 A 事务进行回滚操作, 撤销了修改, 那么 B 事务读取的就是脏数据</li>
+</ul>
+<h3 id="2-不可重复度"><a href="#2-不可重复度" class="headerlink" title="2. 不可重复度"></a>2. 不可重复度</h3><p><strong>不可重复读指在一个事务内多次读取同一数据集合</strong>, 在一个事务未结束, 另一个事务也访问了同一数据进行修改, 由于第二次的修改就会导致, 第一次事务的两次读取可能不一致, 例如 :</p>
+<ul>
+<li>A 事务读取一个数据, 并未结束</li>
+<li>B 事务访问同一数据, 并做修改</li>
+<li>如果 A 事务再次读取这个数据, 此时读取结果会与第一次读取结果不同</li>
+</ul>
+<h3 id="3-幻读"><a href="#3-幻读" class="headerlink" title="3. 幻读"></a>3. 幻读</h3><p>幻读本质上也属于不可重复读的情况, <strong>一个事务在前后两次查询同一范围的时候，后一次查询看到了前一次查询没有看到的行</strong>, 例如 :</p>
+<ul>
+<li>A 事务按照一定条件读取范围数据</li>
+<li>B 事务在这个范围内插入了新的数据</li>
+<li>当 A 事务再次按照条件读取范围数据时, 发现 B 事务插入的数据, 第一次读取结果与第二次不同</li>
+</ul>
+<h3 id="4-丢失更新"><a href="#4-丢失更新" class="headerlink" title="4. 丢失更新"></a>4. 丢失更新</h3><p><strong>丢失更新指一个事务的更新操作会被另一个事务的更新操作所覆盖</strong>, 例如 :</p>
+<ul>
+<li>A, B 两个事务都对同一个数据进行修改</li>
+<li>A 先执行完毕, 提交后生效</li>
+<li>B 随后执行完毕, 提交后覆盖了 A 的修改</li>
+</ul>
+<h2 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h2><p>并发下一致性问题其原因在于破坏了事务的隔离性，通过确保隔离性就可以解决上述问题，其方案有：</p>
+<ul>
+<li>通过锁</li>
+<li>通过事物的隔离级别</li>
+</ul>
+<p>事务的隔离级别分为以下四种：</p>
+<ul>
+<li>读未提交 (READ UNCOMMITTED)：事务可以读取未提交数据</li>
+<li>读已提交 (READ COMMITTED)：事务只可以读取已经提交的事务所做的修改</li>
+<li>可重复读 (REPEATABLE READ)：同一个事务多次读取同样记录结果一致</li>
+<li>可串行化 (SERIALIZABLE)：读取每一行数据上都加锁, 强制事务串行执行</li>
+</ul>
+<p>事务隔离级别能处理的一致性问题表格如下：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>脏读</th>
+<th>不可重复读</th>
+<th>幻读</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>读未提交</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+</tr>
+<tr>
+<td>读已提交</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+</tr>
+<tr>
+<td>可重复读</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+</tr>
+<tr>
+<td>可串行化</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+</tbody></table>
+<h2 id="多版本并发控制-MVCC"><a href="#多版本并发控制-MVCC" class="headerlink" title="多版本并发控制(MVCC)"></a>多版本并发控制(MVCC)</h2><p>多版本并发控制 (Multi-Version Concurrency Control, 以下简称 MVCC), 是 MySQL 的 InnoDB 存储引擎实现隔离级别的一种具体方式, 用于实现提交读和可重复读这两种隔离级别, 而未提交读隔离级别总是读取最新的数据行, 要求很低, 无需使用 MVCC, 可串行化隔离级别需要对所有读取的行都加锁, 单纯使用 MVCC 是无法实现的</p>
+<h3 id="1-名词解释"><a href="#1-名词解释" class="headerlink" title="1. 名词解释"></a>1. 名词解释</h3><h5 id="版本号："><a href="#版本号：" class="headerlink" title="版本号："></a>版本号：</h5><ul>
+<li>系统版本号 SYS_ID : 是一个递增的数字，每开始一个新的事务，系统版本号就会自动递增</li>
+<li>事务版本号 TRX_ID : 事务开始时的系统版本号</li>
+<li>回滚指针 ROLL_POINTER : 一个指针, 指向上一个版本位置</li>
+</ul>
+<h5 id="当前读与快照读："><a href="#当前读与快照读：" class="headerlink" title="当前读与快照读："></a>当前读与快照读：</h5><ul>
+<li>当前读：像 SELECT … LOCK IN SHARE MODE (共享锁), SELECT … FOR UPDATE, UPDATE, INSERT, DELETE, 这些操作都是一种当前读, 它们读取的是记录的最新版本，读取时还要保证其他并发事务不能修改当前记录，会对读取的记录进行加锁</li>
+<li>快照读：不加锁的 SELECT 操作就是快照读, 快照读的前提是隔离级别不是串行级别，串行级别下的快照读会退化成当前读, 快照读基于 MVCC，为了提高并发性能的考虑</li>
+</ul>
+<h5 id="ReadView："><a href="#ReadView：" class="headerlink" title="ReadView："></a>ReadView：</h5><p>MVCC 在内部维护了一个 ReadView 结构, 内部包含当前系统未提交的事务列表 (TRX_IDs), 该列表的最小值 (TRX_ID_MIN) 和最大值 (TRX_ID_MAX), 在进行 SELECT 操作时, 根据数据行快照的 TRX_ID 与 TRX_ID_MIN 和 TRX_ID_MAX 之间的关系, 从而判断数据行快照是否可以使用</p>
+<h3 id="2-工作原理"><a href="#2-工作原理" class="headerlink" title="2. 工作原理"></a>2. 工作原理</h3><p>当一个事务开始时，数据库系统为其创建一个数据的快照版本，并且当事务结束时，该版本的修改将被提交。其他事务在读取该数据时，也看到的是其对应的快照版本，而不会受到当前事务的影响</p>
+<p>细节：</p>
+<ul>
+<li><p>获取事务自己的版本号, 也就是 TRX_ID</p>
+</li>
+<li><p>获取 ReadView</p>
+</li>
+<li><p>查询得到的数据，然后与 ReadView 中的事务版本号进行比较</p>
+</li>
+<li><p>TRX_ID &lt; TRX_ID_MIN, 表示该数据行快照是在当前所有未提交事务之前进行更改的, 因此可以使用</p>
+</li>
+<li><p>TRX_ID &gt; TRX_ID_MAX, 表示该数据行快照是在事务启动之后被更改的, 因此不可使用</p>
+</li>
+<li><p>TRX_ID_MIN &lt;&#x3D; TRX_ID &lt;&#x3D; TRX_ID_MAX, 需要根据隔离级别再进行判断</p>
+</li>
+<li><ul>
+<li>读未提交 : 直接读取最新版本 ReadView</li>
+<li>读已提交 : 每次查询的开始都会生成一个独立的 ReadView</li>
+<li>可重复读 : 可重复读隔离级别则在第一次读的时候生成一个 ReadView，之后的读都复用之前的 ReadView</li>
+</ul>
+</li>
+<li><p>如果不符合 ReadView 规则， 那么就需要 undo log 中回滚指针 ROLL_POINTER 找到下一个快照，再进行上面的判断</p>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://logerjava.github.io/2023/02/03/MySQL%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/" title="MySQL知识点总结" target="_blank" rel="external">http://logerjava.github.io/2023/02/03/MySQL知识点总结/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/logerJava" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/logerJava" target="_blank"><span class="text-dark">loger</span><small class="ml-1x">Java Software Engineer</small></a></h3>
+        <div>人来人往, 云卷云舒</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2023/02/01/%E9%9B%86%E5%90%88%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E9%99%84%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="集合知识点总结(附源码解析)"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/logerJava" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 'kmLjKgtX3vudmyRtKLryzPgu-gzGzoHsz',
+    appKey: 'Lw1W6K30cBzNmbdUSbRo1CGa',
+    placeholder: '欢迎提出您的意见',
+    avatar: 'hide',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
