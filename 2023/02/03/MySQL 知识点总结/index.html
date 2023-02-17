@@ -17,11 +17,11 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>MySQL知识点总结 | logerJava</title>
+  <title>MySQL 知识点总结 | logerJava</title>
   <meta name="description" content="逻辑架构 如上图, 我们可以分为三层来进行解读 :  第一层的服务其实并不是 MySQL 独有的, 大多数的基于网络的客户端 &#x2F; 服务器的工具都有类似架构, 例如连接处理, 授权认证等 第二层是 MySQL 的核心服务, 大多数的 MySQL 功能都在这一层, 包括查询解析, 分析, 优化, 内置函数等, 所有跨存储引擎的功能也都在这一层实现 : 存储过程, 触发器, 视图等 第三层包含">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MySQL知识点总结">
-<meta property="og:url" content="http://logerjava.github.io/2023/02/03/MySQL%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:title" content="MySQL 知识点总结">
+<meta property="og:url" content="http://logerjava.github.io/2023/02/03/MySQL%20%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="logerJava">
 <meta property="og:description" content="逻辑架构 如上图, 我们可以分为三层来进行解读 :  第一层的服务其实并不是 MySQL 独有的, 大多数的基于网络的客户端 &#x2F; 服务器的工具都有类似架构, 例如连接处理, 授权认证等 第二层是 MySQL 的核心服务, 大多数的 MySQL 功能都在这一层, 包括查询解析, 分析, 优化, 内置函数等, 所有跨存储引擎的功能也都在这一层实现 : 存储过程, 触发器, 视图等 第三层包含">
 <meta property="og:locale" content="zh_CN">
@@ -32,13 +32,13 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/logerJava/los/main/picture/%E5%A4%8D%E5%90%88%E7%B4%A2%E5%BC%95.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/logerJava/los/main/picture/MySQL%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3.png">
 <meta property="article:published_time" content="2023-02-03T05:11:24.000Z">
-<meta property="article:modified_time" content="2023-02-07T09:07:58.651Z">
+<meta property="article:modified_time" content="2023-02-14T09:01:36.373Z">
 <meta property="article:author" content="loger">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/logerJava/los/main/picture/Mysql%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://logerjava.github.io/2023/02/03/MySQL%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/index.html">
+  <link rel="canonical" href="http://logerjava.github.io/2023/02/03/MySQL%20%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/index.html">
   
     <link rel="alternate" href="/atom.xml" title="logerJava" type="application/atom+xml">
   
@@ -55,7 +55,7 @@
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 
-<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
   <header class="header" itemscope itemtype="http://schema.org/WPHeader">
   <div class="slimContent">
     <div class="navbar-header">
@@ -66,7 +66,7 @@
           <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
         </a>
         <h2 id="name" class="hidden-xs hidden-sm">loger</h2>
-        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Software Engineer</h3>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Programer</h3>
         <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Beijing, China</small>
       </div>
       
@@ -126,32 +126,12 @@
         </li>
         
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories">
-            
-            <i class="icon icon-folder"></i>
-            
-            <span class="menu-title">分类</span>
-          </a>
-        </li>
-        
-        
         <li class="menu-item menu-item-tags">
           <a href="/tags">
             
             <i class="icon icon-tags"></i>
             
             <span class="menu-title">标签</span>
-          </a>
-        </li>
-        
-        
-        <li class="menu-item menu-item-repository">
-          <a href="/repository">
-            
-            <i class="icon icon-project"></i>
-            
-            <span class="menu-title">项目</span>
           </a>
         </li>
         
@@ -172,18 +152,6 @@
     <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
   <div class="slimContent">
     
-      <div class="widget">
-    <h3 class="widget-title">公告</h3>
-    <div class="widget-body">
-        <div id="board">
-            <div class="content">
-                <p>最近在转移公众号文章到博客, 想看更多目前建议去公众号或者访问 github 的 loger 项目有文章目录</p> <img src="/images/logerJava.png" width="200" height="200">
-            </div>
-        </div>
-    </div>
-</div>
-
-    
       
 
     
@@ -191,116 +159,20 @@
   <div class="widget">
     <h3 class="widget-title">标签</h3>
     <div class="widget-body">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nacos/" rel="tag">Nacos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" rel="tag">消息队列</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nacos/" rel="tag">Nacos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" rel="tag">消息队列</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
-
-    
-      
-  <div class="widget">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget-body tagcloud">
-      <a href="/tags/Java/" style="font-size: 14px;">Java</a> <a href="/tags/Linux/" style="font-size: 13.5px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 14px;">MySQL</a> <a href="/tags/Nacos/" style="font-size: 13px;">Nacos</a> <a href="/tags/Tools/" style="font-size: 13px;">Tools</a> <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" style="font-size: 13px;">消息队列</a>
-    </div>
-  </div>
 
     
       
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">13</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">13</span></li></ul>
     </div>
   </div>
 
-
-    
-      
-  <div class="widget">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget-body">
-      <ul class="recent-post-list list-unstyled no-thumbnail">
-        
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                
-              </p>
-              <p class="item-title">
-                <a href="/2023/02/03/MySQL%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/" class="title">MySQL知识点总结</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2023-02-03T05:11:24.000Z" itemprop="datePublished">2023-02-03</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                
-              </p>
-              <p class="item-title">
-                <a href="/2023/02/01/%E9%9B%86%E5%90%88%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E9%99%84%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" class="title">集合知识点总结(附源码解析)</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2023-02-01T02:30:03.000Z" itemprop="datePublished">2023-02-01</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                
-              </p>
-              <p class="item-title">
-                <a href="/2022/11/11/LiteFlow-%E5%A4%8D%E6%9D%82%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E8%A7%A3%E8%80%A6/" class="title">LiteFlow 复杂业务逻辑解耦</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2022-11-11T02:31:01.000Z" itemprop="datePublished">2022-11-11</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                
-              </p>
-              <p class="item-title">
-                <a href="/2022/11/11/GroovyClassLoader-%E4%BB%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%8A%A0%E8%BD%BD%E8%A7%A3%E6%9E%90%E4%BB%A3%E7%A0%81/" class="title">GroovyClassLoader 从字符串中加载解析代码</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2022-11-11T02:28:39.000Z" itemprop="datePublished">2022-11-11</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                
-              </p>
-              <p class="item-title">
-                <a href="/2022/11/09/KeyTool-%E5%B7%A5%E5%85%B7%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5%E5%AF%B9/" class="title">KeyTool 工具生成密钥对</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2022-11-09T05:56:50.000Z" itemprop="datePublished">2022-11-09</time>
-              </p>
-            </div>
-          </li>
-          
-      </ul>
-    </div>
-  </div>
-  
 
     
   </div>
@@ -308,16 +180,25 @@
 
   
   
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">逻辑架构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-number">2.</span> <span class="toc-text">索引</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#B-Tree-%E5%8E%9F%E7%90%86"><span class="toc-number">2.1.</span> <span class="toc-text">B+Tree 原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">2.1.1.</span> <span class="toc-text">数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C"><span class="toc-number">2.1.2.</span> <span class="toc-text">操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8E%E7%BA%A2%E9%BB%91%E6%A0%91%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-number">2.1.3.</span> <span class="toc-text">与红黑树的比较</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-B-%E6%A0%91%E6%9C%89%E6%9B%B4%E4%BD%8E%E7%9A%84%E6%A0%91%E9%AB%98"><span class="toc-number">2.1.3.0.1.</span> <span class="toc-text">1. B+ 树有更低的树高</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E7%A3%81%E7%9B%98%E8%AE%BF%E9%97%AE%E5%8E%9F%E7%90%86"><span class="toc-number">2.1.3.0.2.</span> <span class="toc-text">2. 磁盘访问原理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E7%A3%81%E7%9B%98%E9%A2%84%E8%AF%BB%E7%89%B9%E6%80%A7"><span class="toc-number">2.1.3.0.3.</span> <span class="toc-text">3. 磁盘预读特性</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL-%E7%B4%A2%E5%BC%95"><span class="toc-number">2.2.</span> <span class="toc-text">MySQL 索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#B-Tree-%E7%B4%A2%E5%BC%95"><span class="toc-number">2.2.1.</span> <span class="toc-text">B+ Tree 索引</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">1. 聚簇索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95"><span class="toc-number">2.2.1.2.</span> <span class="toc-text">2. 二级索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%A4%8D%E5%90%88%E7%B4%A2%E5%BC%95"><span class="toc-number">2.2.1.3.</span> <span class="toc-text">3. 复合索引</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%88%E5%B8%8C%E7%B4%A2%E5%BC%95"><span class="toc-number">2.2.2.</span> <span class="toc-text">哈希索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E6%96%87%E7%B4%A2%E5%BC%95"><span class="toc-number">2.2.3.</span> <span class="toc-text">全文索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE%E7%B4%A2%E5%BC%95"><span class="toc-number">2.2.4.</span> <span class="toc-text">空间数据索引</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A5%E5%BF%97"><span class="toc-number">3.</span> <span class="toc-text">日志</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#redo-log"><span class="toc-number">3.1.</span> <span class="toc-text">redo log</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-redo-log-%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">3.1.0.1.</span> <span class="toc-text">1. redo log 的概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-redo-log-%E5%A6%82%E4%BD%95%E5%AD%98%E5%82%A8"><span class="toc-number">3.1.0.2.</span> <span class="toc-text">2. redo log 如何存储</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#binlog"><span class="toc-number">3.2.</span> <span class="toc-text">binlog</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-binlog-%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">3.2.0.1.</span> <span class="toc-text">1. binlog 的概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-binlog-%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">3.2.0.2.</span> <span class="toc-text">2. binlog 的作用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E6%AF%94-redo-log-%E4%B8%8E-binlog"><span class="toc-number">3.3.</span> <span class="toc-text">对比 redo log 与 binlog</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%AD%98%E5%82%A8%E5%86%85%E5%AE%B9%E4%B8%8D%E5%90%8C"><span class="toc-number">3.3.0.0.1.</span> <span class="toc-text">1. 存储内容不同</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%8A%9F%E8%83%BD%E4%B8%8D%E5%90%8C"><span class="toc-number">3.3.0.0.2.</span> <span class="toc-text">2. 功能不同</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%A4%E6%AE%B5%E5%BC%8F%E6%8F%90%E4%BA%A4"><span class="toc-number">3.4.</span> <span class="toc-text">两段式提交</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undo-log"><span class="toc-number">3.5.</span> <span class="toc-text">undo log</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#error-log"><span class="toc-number">3.6.</span> <span class="toc-text">error log</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#general-query-log"><span class="toc-number">3.7.</span> <span class="toc-text">general query log</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#slow-query-log"><span class="toc-number">3.8.</span> <span class="toc-text">slow query log</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%94%81"><span class="toc-number">4.</span> <span class="toc-text">锁</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL-%E4%B8%AD%E9%94%81%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">4.1.</span> <span class="toc-text">MySQL 中锁的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-MyISAM-%E4%B8%AD%E7%9A%84%E8%A1%A8%E9%94%81"><span class="toc-number">4.1.1.</span> <span class="toc-text">1. MyISAM 中的表锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%9F%A5%E8%AF%A2%E8%A1%A8%E9%94%81%E4%BA%89%E7%94%A8%E6%83%85%E5%86%B5"><span class="toc-number">4.1.2.</span> <span class="toc-text">2. 查询表锁争用情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-InnoDB-%E4%B8%AD%E7%9A%84%E9%94%81"><span class="toc-number">4.1.3.</span> <span class="toc-text">3. InnoDB 中的锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-InnoDB-%E5%8A%A0%E9%94%81%E6%96%B9%E6%B3%95"><span class="toc-number">4.1.4.</span> <span class="toc-text">4. InnoDB 加锁方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E9%9A%90%E5%BC%8F%E9%94%81%E5%AE%9A%E4%B8%8E%E6%98%BE%E7%A4%BA%E9%94%81%E5%AE%9A"><span class="toc-number">4.1.5.</span> <span class="toc-text">5. 隐式锁定与显示锁定</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%9A%90%E5%BC%8F%E9%94%81%E5%AE%9A"><span class="toc-number">4.1.5.1.</span> <span class="toc-text">1. 隐式锁定</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%98%BE%E7%A4%BA%E9%94%81%E5%AE%9A"><span class="toc-number">4.1.5.2.</span> <span class="toc-text">2. 显示锁定</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%80%A7%E8%83%BD%E5%BD%B1%E5%93%8D"><span class="toc-number">4.1.5.3.</span> <span class="toc-text">3. 性能影响</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#InnoDB-%E7%9A%84%E9%97%B4%E9%9A%99%E9%94%81"><span class="toc-number">4.1.6.</span> <span class="toc-text">InnoDB 的间隙锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#InnoDB-%E4%BD%BF%E7%94%A8%E9%97%B4%E9%9A%99%E9%94%81%E7%9A%84%E7%9B%AE%E7%9A%84"><span class="toc-number">4.1.7.</span> <span class="toc-text">InnoDB 使用间隙锁的目的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96-InnoDB-%E8%A1%8C%E9%94%81%E7%9A%84%E4%BA%89%E7%94%A8%E6%83%85%E5%86%B5"><span class="toc-number">4.1.8.</span> <span class="toc-text">获取 InnoDB 行锁的争用情况</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1"><span class="toc-number">5.</span> <span class="toc-text">事务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8B%E5%8A%A1"><span class="toc-number">5.1.</span> <span class="toc-text">什么是事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E4%B8%8B%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98"><span class="toc-number">5.2.</span> <span class="toc-text">并发下一致性问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%84%8F%E8%AF%BB"><span class="toc-number">5.2.1.</span> <span class="toc-text">1. 脏读</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E5%BA%A6"><span class="toc-number">5.2.2.</span> <span class="toc-text">2. 不可重复度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%B9%BB%E8%AF%BB"><span class="toc-number">5.2.3.</span> <span class="toc-text">3. 幻读</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%B8%A2%E5%A4%B1%E6%9B%B4%E6%96%B0"><span class="toc-number">5.2.4.</span> <span class="toc-text">4. 丢失更新</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="toc-number">5.3.</span> <span class="toc-text">事务隔离级别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%89%88%E6%9C%AC%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6-MVCC"><span class="toc-number">5.4.</span> <span class="toc-text">多版本并发控制(MVCC)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"><span class="toc-number">5.4.1.</span> <span class="toc-text">1. 名词解释</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E5%8F%B7%EF%BC%9A"><span class="toc-number">5.4.1.0.1.</span> <span class="toc-text">版本号：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BD%93%E5%89%8D%E8%AF%BB%E4%B8%8E%E5%BF%AB%E7%85%A7%E8%AF%BB%EF%BC%9A"><span class="toc-number">5.4.1.0.2.</span> <span class="toc-text">当前读与快照读：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ReadView%EF%BC%9A"><span class="toc-number">5.4.1.0.3.</span> <span class="toc-text">ReadView：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">5.4.2.</span> <span class="toc-text">2. 工作原理</span></a></li></ol></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
 <main class="main" role="main">
   <div class="content">
-  <article id="post-MySQL知识点总结" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-MySQL 知识点总结" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      MySQL知识点总结
+      MySQL 知识点总结
     </h1>
   
 
@@ -325,7 +206,7 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2023/02/03/MySQL%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/" class="article-date">
+	<a href="/2023/02/03/MySQL%20%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/" class="article-date">
 	  <time datetime="2023-02-03T05:11:24.000Z" itemprop="datePublished">2023-02-03</time>
 	</a>
 </span>
@@ -339,7 +220,7 @@
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/02/03/MySQL%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/02/03/MySQL%20%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/#comments" class="article-comment-link">评论</a></span>
         
 	
 		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 7.8k(字)</span>
@@ -762,7 +643,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://logerjava.github.io/2023/02/03/MySQL%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/" title="MySQL知识点总结" target="_blank" rel="external">http://logerjava.github.io/2023/02/03/MySQL知识点总结/</a>
+      <a href="http://logerjava.github.io/2023/02/03/MySQL%20%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/" title="MySQL 知识点总结" target="_blank" rel="external">http://logerjava.github.io/2023/02/03/MySQL 知识点总结/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -781,7 +662,7 @@
         </a>
       </div>
       <div class="media-body">
-        <h3 class="media-heading"><a href="https://github.com/logerJava" target="_blank"><span class="text-dark">loger</span><small class="ml-1x">Java Software Engineer</small></a></h3>
+        <h3 class="media-heading"><a href="https://github.com/logerJava" target="_blank"><span class="text-dark">loger</span><small class="ml-1x">Java Programer</small></a></h3>
         <div>人来人往, 云卷云舒</div>
       </div>
     </figure>
@@ -808,11 +689,23 @@
   
   <ul class="pager pull-left">
     
+    <li class="prev">
+      <a href="/2023/02/08/Redis%20%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/" title="Redis 数据类型和应用场景"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
     
     <li class="next">
       <a href="/2023/02/01/%E9%9B%86%E5%90%88%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E9%99%84%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="集合知识点总结(附源码解析)"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
     
   </ul>
   
