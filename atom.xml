@@ -214,9 +214,9 @@
     
     
     
-    <category term="Java" scheme="http://logerjava.github.io/tags/Java/"/>
-    
     <category term="Linux" scheme="http://logerjava.github.io/tags/Linux/"/>
+    
+    <category term="Java" scheme="http://logerjava.github.io/tags/Java/"/>
     
   </entry>
   
@@ -240,9 +240,9 @@
     
     
     
-    <category term="Java" scheme="http://logerjava.github.io/tags/Java/"/>
-    
     <category term="Linux" scheme="http://logerjava.github.io/tags/Linux/"/>
+    
+    <category term="Java" scheme="http://logerjava.github.io/tags/Java/"/>
     
     <category term="Nacos" scheme="http://logerjava.github.io/tags/Nacos/"/>
     
