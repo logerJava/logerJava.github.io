@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://logerjava.github.io/2023/02/17/%E4%B8%80%E6%AC%A1%E5%AF%BC%E5%85%A5%E5%BC%95%E8%B5%B7%E7%9A%84-MySQL-%E7%B4%A2%E5%BC%95%E5%A4%B1%E6%95%88/</loc>
+    
+    <lastmod>2023-02-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://logerjava.github.io/2023/02/14/Redis%20%E6%8C%81%E4%B9%85%E5%8C%96/</loc>
     
     <lastmod>2023-02-17</lastmod>
@@ -184,7 +193,7 @@
 
   <url>
     <loc>http://logerjava.github.io/</loc>
-    <lastmod>2023-02-17</lastmod>
+    <lastmod>2023-02-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -192,49 +201,56 @@
   
   <url>
     <loc>http://logerjava.github.io/tags/Java/</loc>
-    <lastmod>2023-02-17</lastmod>
+    <lastmod>2023-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://logerjava.github.io/tags/Tools/</loc>
-    <lastmod>2023-02-17</lastmod>
+    <lastmod>2023-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://logerjava.github.io/tags/Linux/</loc>
-    <lastmod>2023-02-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://logerjava.github.io/tags/Nacos/</loc>
-    <lastmod>2023-02-17</lastmod>
+    <lastmod>2023-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://logerjava.github.io/tags/MySQL/</loc>
-    <lastmod>2023-02-17</lastmod>
+    <lastmod>2023-02-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://logerjava.github.io/tags/Nacos/</loc>
+    <lastmod>2023-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://logerjava.github.io/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</loc>
-    <lastmod>2023-02-17</lastmod>
+    <lastmod>2023-02-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://logerjava.github.io/tags/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2023-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://logerjava.github.io/tags/Redis/</loc>
-    <lastmod>2023-02-17</lastmod>
+    <lastmod>2023-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

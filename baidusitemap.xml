@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://logerJava.github.io/2023/02/17/%E4%B8%80%E6%AC%A1%E5%AF%BC%E5%85%A5%E5%BC%95%E8%B5%B7%E7%9A%84-MySQL-%E7%B4%A2%E5%BC%95%E5%A4%B1%E6%95%88/</loc>
+    <lastmod>2023-02-17</lastmod>
+  </url>
+  <url>
     <loc>http://logerJava.github.io/2023/02/14/Redis%20%E6%8C%81%E4%B9%85%E5%8C%96/</loc>
     <lastmod>2023-02-17</lastmod>
   </url>
